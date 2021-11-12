@@ -12,10 +12,10 @@
     
     $tipo = "guitarra";
     $marca= "gibson";
-    $modelo= "sg spezial faded";
+    $modelo= "sg spezial faded 60s";
     $fabricacion= "2021-11-11";
-    $num_serie= "55555464";
-    $precio= "545";
+    $num_serie= 444444;
+    $precio= 545;
     $imagen = "ruta de prueba";
 
     insertaElemento($tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen);
@@ -30,18 +30,22 @@
         $conexion = new PDO("mysql:host=$servidor;dbname=$baseDatos", $usuario, $pass);
         echo"Conectado correctamente";
         echo"<br>";
-        $sql = "INSERT INTO 'instrumentos' ('tipo', 'marca', 'modelo', 'fabricacion', 'num_serie', 'precio', 'imagen') VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $statement=$conexion->prepare($sql);
-    
+        
+        $consulta = $conexion->prepare("INSERT INTO instrumentos (tipo, marca, modelo, fabricacion, num_serie, precio, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)");
             
-            $statement->execute([$tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen]);
-            $numeroInstrumentos =$conexion->exec($sql);    
-            var_dump($conexion);
+            $consulta->bindParam(1, $tipo);
+            $consulta->bindParam(2, $marca);
+            $consulta->bindParam(3, $modelo);
+            $consulta->bindParam(4, $fabricacion);
+            $consulta->bindParam(5, $num_serie);
+            $consulta->bindParam(6, $precio);
+            $consulta->bindParam(7, $imagen);
+            
+            $consulta->execute();
 
-            $numeroInstrumentos =$conexion->exec($sql);
-            $last_id = $conexion ->lastInsertId();
-            echo "se han añadido $numeroInstrumentos instrumentos nuevo con el id: $last_id";
             
+            $last_id = $conexion ->lastInsertId();
+            echo "se han añadido instrumentos nuevo con el id: $last_id";
             
         } catch(PDOException $e) {
             echo"Conexion fallida: = " . $e->getMessage();
