@@ -15,7 +15,7 @@
     <th>AÑO FABRICACION</th>
 </tr>
     <?php
-    $arrayconinstrumentos = obtenerTodos();
+    $arrayconinstrumentos = ObtenerPorId(4);
     var_dump($arrayconinstrumentos);
     echo "</br>";
     echo "</br>";
@@ -51,6 +51,31 @@
                 $consulta =$conexion->prepare("SELECT id, tipo, marca, fabricacion FROM instrumentos"); 
                 $consulta->execute(); 
                 
+                
+                while($fila = $consulta->fetch(PDO::FETCH_ASSOC)){
+                    $array[]=$fila;
+                }
+                    
+            } catch (PDOException $e) {
+                echo"Conexion fallida: = " . $e->getMessage();
+            
+            }
+            $conn=null;
+            return $array;
+        }
+
+        function obtenerPorId($id){   
+            $servidor = "localhost";
+            $baseDatos = "instrumentosmusicales";
+            $usuario = "root";
+            $pass = "root";
+        
+            $conexion = new PDO("mysql:host=$servidor;dbname=$baseDatos", $usuario, $pass);
+            try {    
+                echo "conectado correctamente";
+                $consulta =$conexion->prepare("SELECT * FROM instrumentos WHERE id = ?"); 
+                $consulta->bindParam(1, $id);
+                $consulta->execute(); 
                 
                 while($fila = $consulta->fetch(PDO::FETCH_ASSOC)){
                     $array[]=$fila;
