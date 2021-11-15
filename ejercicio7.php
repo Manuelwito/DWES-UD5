@@ -23,6 +23,9 @@
 $nombre = "";
 $contrasenia = "";
 
+
+
+
             if($_SERVER["REQUEST_METHOD"]=="POST"){
             
            
@@ -43,6 +46,11 @@ $contrasenia = "";
             if( $retorno == true){
 
                 echo "Contraseña correcta";
+                //si la contraseña es correcta cerramos la sesion anterior y abrimos una nueva
+                session_destroy();
+                //y se inicia sesión de nuevo
+                session_start();
+
             } 
             else{
                 echo "Contraseña incorrecta";
