@@ -7,6 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>pagina de usuario</h1>
+        <?php
+        session_start();
+        if($_SESSION['rol']=='usuario'){
+            echo "correcto, usuario";
+           
+        }else if($_SESSION['rol']=='admin'){
+            header('location: admin.php');
+        } else{
+            header('location: ejercicio7.php');
+        }
+   
+        ?>
+<a href="cierrasesion.php">Cerrar Sesión</a>
 </body>
 </html>
