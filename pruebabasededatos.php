@@ -18,11 +18,11 @@
     $precio= 545;
     $imagen = "ruta de prueba";
 
-    $id=4;
+    $id=6;
 
     /*insertaElemento($tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen);*/
     /*eliminarElemento($id);*/
-   /* editarElemento($id, $tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen);*/
+   editarElemento($id, $tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen);
 
     function insertaElemento($tipo, $marca, $modelo, $fabricacion, $num_serie, $precio, $imagen){
         $servidor = "localhost";
